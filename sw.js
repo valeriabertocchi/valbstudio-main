@@ -1,6 +1,6 @@
 /* Valb Studio · Gestionale — service worker: l'app si apre anche senza connessione.
    Quando pubblichi una nuova versione, cambia il numero qui sotto (VERSION) così iPhone e iPad la scaricano. */
-const VERSION = "valb-2026-11-24-1";
+const VERSION = "valb-2026-11-25-1";
 const SHELL = [
   "./", "index.html", "styles.css", "app.js", "sync.js", "config.js", "manifest.webmanifest",
   "vendor/supabase-2.118.0.js",

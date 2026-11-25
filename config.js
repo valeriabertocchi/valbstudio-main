@@ -4,6 +4,6 @@
    Se preferisci scriverli qui una volta per tutte, incollali tra le virgolette.
    La chiave "anon public" può stare qui: i dati restano protetti dall'accesso con email e password. */
 window.VALB_CONFIG = {
-  supabaseUrl: "",
-  supabaseAnonKey: ""
+  supabaseUrl: "https://ljbopyrqemuymhpgyjpk.supabase.co",
+  supabaseAnonKey: "sb_publishable_5q1MQsEgOC3x6iXpKebkKg_QznBfW22"
 };
