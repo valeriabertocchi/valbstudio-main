@@ -28,6 +28,7 @@ create trigger items_touch before insert or update on public.items
 -- 2. Ognuno vede e modifica solo le proprie schede
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on public.items to authenticated;
+grant select, insert, update, delete on public.items to service_role;
 alter table public.items enable row level security;
 drop policy if exists "items_select_own" on public.items;
 drop policy if exists "items_insert_own" on public.items;
