@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Valb Studio</title>
+<meta name="description" content="Gestionale di Valb Studio: magazzino, catalogo, ordini e dashboard.">
+<meta name="theme-color" content="#f7f1ea">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Valb Studio">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app" id="app">
+    <div class="shell">
+      <header class="topbar">
+        <div class="brandmark" role="img" aria-label="Valb Studio"><span class="lm lm-mono"></span><span class="lm lm-word"></span></div>
+        <div class="top-actions"><button class="iconbtn" id="set-btn" aria-label="Impostazioni" aria-current="false"></button><button class="iconbtn" id="notes-btn" aria-label="Note" aria-current="false"></button><button class="add" id="add" aria-label="Aggiungi">+</button></div>
+      </header>
+      <main class="main" id="main"></main>
+      <nav class="tabbar" id="tabbar" aria-label="Sezioni"><svg class="barbg" id="barbg" aria-hidden="true"><defs><mask id="barmask" maskUnits="userSpaceOnUse" x="-20" y="-80" width="4000" height="400"></mask></defs><rect class="bar" id="barrect" x="0" y="0" width="0" height="0" mask="url(#barmask)"/></svg><span class="ind-c" id="indc" aria-hidden="true"><span class="ind-ic" id="indic"></span></span><div class="tabs" id="tabs"></div></nav>
+    </div>
+    <section class="sheet" id="sheet" aria-label="Dettaglio"></section>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <div class="pop" id="pop" hidden></div>
+    <div class="gate" id="gate" hidden></div>
+    <div class="splash" id="splash" aria-hidden="true">
+      <div class="splash-inner">
+        <span class="lm lm-mono"></span>
+        <div class="lockup"><span class="lm lm-word"></span><span class="lm lm-fregio"></span><span class="tagline">Designed to exist only once</span></div>
+        <span class="gest">Gestionale</span>
+      </div>
+      <span class="made">Made in Italy</span>
+    </div>
+  </div>
+
+<script src="config.js"></script>
+<script src="vendor/supabase-2.118.0.js"></script>
+<script src="app.js"></script>
+<script src="sync.js"></script>
+</body>
+</html>
