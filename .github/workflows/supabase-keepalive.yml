@@ -1,0 +1,44 @@
+# Keeps the free Supabase project awake: Supabase pauses projects after 7 days without use.
+# Every 3 days this "knocks" on the database with a tiny read.
+# Project URL and anon key are taken from the repository secrets SUPABASE_URL / SUPABASE_ANON_KEY
+# if they exist, otherwise from config.js. If neither is filled in yet, the run just skips.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "17 6 */3 * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ping Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          url="${SUPABASE_URL:-$(sed -n 's/.*supabaseUrl: *"\([^"]*\)".*/\1/p' config.js)}"
+          key="${SUPABASE_ANON_KEY:-$(sed -n 's/.*supabaseAnonKey: *"\([^"]*\)".*/\1/p' config.js)}"
+          if [ -z "$url" ] || [ -z "$key" ]; then
+            echo "Supabase non ancora collegato: niente da fare."
+            exit 0
+          fi
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: $key" -H "Authorization: Bearer $key" \
+            "${url%/}/rest/v1/items?select=rid&limit=1")
+          echo "Risposta di Supabase: $code"
+          if [ "$code" -ge 500 ] || [ "$code" = "000" ]; then exit 1; fi
+
+      # GitHub switches off scheduled workflows after 60 days without commits:
+      # switching this one back on every run keeps it going.
+      - name: Keep this schedule active
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/supabase-keepalive.yml/enable" || true
